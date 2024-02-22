@@ -21,29 +21,28 @@ async fn setup_hotkey(app: AppHandle) {
     app.app_handle()
         .plugin(
             tauri_plugin_global_shortcut::Builder::with_handler(move |app, key| {
-                println!("key");
                 let state = app.state::<Mutex<DelayState>>();
                 let mut lock = state.lock().unwrap();
+                let handle = app.app_handle().clone();
                 if key.id() == shortcut_delay_id {
                     lock.enabled = !lock.enabled;
-                }
+                };
                 if !lock.enabled {
-                    return;
-                }
-                let handle = app.app_handle().clone();
+                  handle.emit("sound", "off").unwrap();
+                  return;
+                };
+                handle.emit("sound", "on").unwrap();
                 tauri::async_runtime::spawn(async move {
                     let mut enabled: bool = true;
                     let mut delay: u64 = 1000;
                     while enabled {
-                        tokio::time::sleep(tokio::time::Duration::from_millis(delay)).await;
-                        let state = handle.state::<Mutex<DelayState>>();
-                        let lock = state.lock().unwrap();
-                        enabled = lock.enabled;
-                        delay = lock.delay;
-                        autopilot::mouse::click(Button::Left, Some(0));
-                        println!("click");
-                    }
-                    println!("exiting");
+                      tokio::time::sleep(tokio::time::Duration::from_millis(delay)).await;
+                      let state = handle.state::<Mutex<DelayState>>();
+                      let lock = state.lock().unwrap();
+                      enabled = lock.enabled;
+                      delay = lock.delay;
+                      autopilot::mouse::click(Button::Left, Some(0));
+                    };
                 });
             })
             .build(),

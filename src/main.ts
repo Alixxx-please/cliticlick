@@ -1,8 +1,9 @@
 import { invoke } from "@tauri-apps/api/core";
+import { listen } from '@tauri-apps/api/event';
 
-//const toggle = document.querySelector('.toggle') as HTMLDivElement;
+const toggle = document.querySelector('.toggle') as HTMLDivElement;
 const input: HTMLInputElement = document.getElementById("input") as HTMLInputElement;
-//const off = document.querySelector('.off') as HTMLDivElement;
+const audio = document.querySelector('audio')
 let delay = 1000;
 input.value = delay.toString();
 
@@ -14,10 +15,23 @@ input?.addEventListener("input", (e) => {
   console.log(delay);
 });
 
-const output: HTMLElement = document.getElementById("counter") as HTMLElement;
-let counter = 0;
-document.addEventListener("click", () => {
-  console.log("CLICK RECEIVED");
-  counter += 1;
-  output.innerText = counter.toString();
+await listen(('sound'), (e) => {
+  const msg = e.payload;
+  if (msg === 'on') {
+    audio?.play();
+    toggle.style.backgroundColor = 'green';
+  } else if (msg === 'off') {
+    audio?.pause();
+    if (audio) audio.currentTime = 0;
+    toggle.style.backgroundColor = 'red';
+  }
 });
+
+toggle?.addEventListener('focus', () => {
+  console.log('focus');
+});
+
+const unlisten = await listen<string>('error', (e) => {
+  console.error(`Got error, payload: ${e.payload}`);
+});
+unlisten();
