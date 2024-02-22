@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { listen } from '@tauri-apps/api/event';
+import { listen, emit } from '@tauri-apps/api/event';
 
 const toggle = document.querySelector('.toggle') as HTMLDivElement;
 const input: HTMLInputElement = document.getElementById("input") as HTMLInputElement;
@@ -27,8 +27,9 @@ await listen(('sound'), (e) => {
   }
 });
 
-toggle?.addEventListener('focus', () => {
-  console.log('focus');
+document.addEventListener('mouseover', () => {
+  console.log('Le curseur est sur la fenêtre');
+  emit('focus');
 });
 
 const unlisten = await listen<string>('error', (e) => {
