@@ -27,9 +27,30 @@ await listen(('sound'), (e) => {
   }
 });
 
+await listen(('bg_color'), (e) => {
+  const msg = e.event
+  if (msg === 'bg_color') toggle.style.backgroundColor = 'green'
+});
+
+await listen(('hover'), (e) => {
+  const msg = e.event;
+  if (msg === 'hover') toggle.style.backgroundColor = 'orange';
+});
+
 document.addEventListener('mouseover', () => {
-  console.log('Le curseur est sur la fenêtre');
   emit('focus');
+});
+
+document.addEventListener('mousemove', () => {
+  emit('focus');
+});
+
+document.addEventListener('mouseenter', () => {
+  emit('focus');
+});
+
+document.addEventListener('mouseout', () => {
+  emit('leave');
 });
 
 const unlisten = await listen<string>('error', (e) => {
