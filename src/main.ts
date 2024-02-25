@@ -3,6 +3,7 @@ import { listen, emit } from '@tauri-apps/api/event';
 
 const toggle = document.querySelector('.toggle') as HTMLDivElement;
 const input: HTMLInputElement = document.getElementById("input") as HTMLInputElement;
+const button = document.getElementById('button') as HTMLDivElement;
 const audio = document.querySelector('audio')
 let delay = 1000;
 input.value = delay.toString();
@@ -38,19 +39,26 @@ await listen(('hover'), (e) => {
 });
 
 document.addEventListener('mouseover', () => {
+  window.focus();
   emit('focus');
+  button?.classList.remove('paused');
 });
 
 document.addEventListener('mousemove', () => {
+  window.focus();
   emit('focus');
+  button?.classList.remove('paused');
 });
 
 document.addEventListener('mouseenter', () => {
+  window.focus();
   emit('focus');
+  button?.classList.remove('paused');
 });
 
 document.addEventListener('mouseout', () => {
   emit('leave');
+  button?.classList.add('paused');
 });
 
 const unlisten = await listen<string>('error', (e) => {

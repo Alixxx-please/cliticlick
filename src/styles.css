@@ -20,7 +20,65 @@ body {
   position: absolute;
   z-index: 3;
   top: 50%;
-  left: 50%;
+  left: 10%;
   width: 50%;
   height: 50px;
+  width: 50px;
+}
+
+.button {
+  position: absolute;
+  overflow: hidden;
+  display: block;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.left {
+  height: 100%;
+  float: left;
+  background-color: #fff;
+  width: 25%;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+.triangle1 {
+  transform: translate(0, -100%);
+}
+.triangle2 {
+  transform: translate(0, 100%);
+}
+.triangle1, .triangle2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  border-right: 300px solid red;
+  border-top: 150px solid transparent;
+  border-bottom: 150px solid transparent;
+  transition: transform 0.25s ease;
+}
+.right {
+  height: 100%;
+  float: right;
+  width: 25%;
+  background-color: #fff;
+  transition: all 0.25s ease;
+}
+.paused .left {
+  width: 50%;
+}
+.paused .right {
+  width: 50%;
+}
+.paused .triangle1 {
+  transform: translate(0, -50%);
+}
+.paused .triangle2 {
+  transform: translate(0, 50%);
 }
