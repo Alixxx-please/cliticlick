@@ -30,8 +30,8 @@ body {
   position: absolute;
   overflow: hidden;
   display: block;
-  width: 300px;
-  height: 300px;
+  width: 30%;
+  height: 30%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,9 +41,10 @@ body {
   height: 100%;
   float: left;
   background-color: #fff;
-  width: 25%;
+  width: 15%;
   transition: all 0.25s ease;
   overflow: hidden;
+  border-radius: 12px;
 }
 .triangle1 {
   transform: translate(0, -100%);
@@ -58,22 +59,20 @@ body {
   background-color: transparent;
   width: 0;
   height: 0;
-  border-right: 300px solid red;
-  border-top: 150px solid transparent;
-  border-bottom: 150px solid transparent;
+  border-right: 30vw solid green;
+  border-top: 15vw solid transparent;
+  border-bottom: 15vw solid transparent;
   transition: transform 0.25s ease;
 }
 .right {
   height: 100%;
   float: right;
-  width: 25%;
+  width: 15%;
   background-color: #fff;
   transition: all 0.25s ease;
+  border-radius: 12px;
 }
-.paused .left {
-  width: 50%;
-}
-.paused .right {
+.paused .left, .paused .right {
   width: 50%;
 }
 .paused .triangle1 {
@@ -81,4 +80,43 @@ body {
 }
 .paused .triangle2 {
   transform: translate(0, 50%);
+}
+
+.top {
+  position: absolute;
+  height: 100%;
+  float: left;
+  background-color: black;
+  width: 15%;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  border-radius: 12px;
+  transform-origin: top;
+}
+.bottom {
+  position: absolute;
+  height: 100%;
+  float: right;
+  width: 15%;
+  background-color: black;
+  transition: all 0.25s ease;
+  border-radius: 12px;
+  transform-origin: bottom;
+  top: 0;
+  right: 0;
+}
+
+
+.stop {
+  position: absolute;
+  background-color: transparent;
+  border-radius: 10%;
+  transition: all 0.25s ease;
+}
+
+.stop .top {
+  transform: rotate(-90deg) translate(-50%, -12%);
+}
+.stop .bottom {
+  transform: rotate(-90deg) translate(50%, 12%);
 }

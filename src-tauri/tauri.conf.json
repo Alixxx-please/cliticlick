@@ -13,10 +13,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
+        "resizable": false,
         "title": "cliticlick",
-        "width": 400,
-        "height": 400,
+        "width": 300,
+        "height": 300,
         "titleBarStyle": "Overlay"
       }
     ],
