@@ -36,4 +36,4 @@ jobs:
 
       - uses: tauri-apps/tauri-action@v0
         with:
-          tauriScript: bun
+          tauriScript: bun run
