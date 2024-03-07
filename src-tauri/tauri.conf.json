@@ -1,7 +1,7 @@
 {
   "productName": "cliticlick",
   "version": "0.0.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.xxX.Cliticlic",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
