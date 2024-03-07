@@ -37,3 +37,8 @@ jobs:
       - uses: tauri-apps/tauri-action@v0
         with:
           tauriScript: bun run
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          path: 'D:\a\cliticlick\cliticlick\src-tauri\target\release\bundle\'
