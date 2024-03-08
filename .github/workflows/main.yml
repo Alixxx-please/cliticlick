@@ -20,6 +20,11 @@ jobs:
         with:
           bun-version: canary
 
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2.7.3
+        with:
+          workspaces: './src-tauri -> target'
+
       - name: install Rust stable
         uses: actions-rs/toolchain@v1.0.6
         with:
@@ -41,4 +46,4 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.1
         with:
-          path: 'D:\a\cliticlick\cliticlick\src-tauri\target\release\bundle\msi\cliticlick_0.0.0_x64_en-US.msi'
+          path: 'D:\a\cliticlick\cliticlick\src-tauri\target\release\bundle\*'
