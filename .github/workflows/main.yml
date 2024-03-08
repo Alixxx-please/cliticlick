@@ -9,10 +9,10 @@ jobs:
         platform: [macos-latest, ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.1
       
       - name: setup Bun
-        uses: oven-sh/setup-bun@v1.1.1
+        uses: oven-sh/setup-bun@v1.2.0
         with:
           bun-version: canary
       
