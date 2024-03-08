@@ -15,11 +15,6 @@ jobs:
         uses: oven-sh/setup-bun@v1.2.0
         with:
           bun-version: canary
-
-      - name: Rust cache
-        uses: Swatinem/rust-cache@v2.7.3
-        with:
-          workspaces: './src-tauri -> target'
       
       - name: install Rust stable
         uses: actions-rs/toolchain@v1.0.6
