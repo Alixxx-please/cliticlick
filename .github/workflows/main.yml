@@ -36,7 +36,7 @@ jobs:
 
       - uses: tauri-apps/tauri-action@v0
         with:
-          tauriScript: bun run
+          tauriScript: bun run tauri
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.1
