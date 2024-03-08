@@ -39,28 +39,21 @@ jobs:
         with:
           tauriScript: bun run tauri
       
-      - name: Upload a Build Artifact
+      - name: Upload artifact 1/3
         uses: actions/upload-artifact@v4.3.1
         with:
-          name: All artifacts
-          path: |
-            ${{ runner.os }}-bundle/
-            '/home/runner/work/cliticlick/cliticlick/src-tauri/target/release/bundle/*'
+          name: Windows builds
+          path: 'D:\a\cliticlick\cliticlick\src-tauri\target\release\bundle\*'
 
-      - name: Prepare bundle directory for Windows
-        if: matrix.platform == 'windows-latest'
-        run: |
-          mkdir ${{ runner.os }}-bundle
-          mv '/Users/runner/work/cliticlick/cliticlick/src-tauri/target/release/bundle/'* ./${{ runner.os }}-bundle/
+      - name: Upload artifact 2/3
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: macOS builds
+          path: '/Users/runner/work/cliticlick/cliticlick/src-tauri/target/release/bundle/*'     
 
-      - name: Prepare bundle directory for macOS
-        if: matrix.platform == 'macos-latest'
-        run: |
-          mkdir ${{ runner.os }}-bundle
-          mv '/home/runner/work/cliticlick/cliticlick/src-tauri/target/release/bundle/'* ./${{ runner.os }}-bundle/
-
-      - name: Prepare bundle directory for Ubuntu
-        if: matrix.platform == 'ubuntu-22.04'
-        run: |
-          mkdir ${{ runner.os }}-bundle
-          mv '/home/runner/work/cliticlick/cliticlick/src-tauri/target/release/bundle/'* ./${{ runner.os }}-bundle/
+      - name: Upload artifact 3/3
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: Ubuntu builds
+          path: '/home/runner/work/cliticlick/cliticlick/src-tauri/target/release/bundle/*'
+            
