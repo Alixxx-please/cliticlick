@@ -65,10 +65,16 @@ async fn setup_hotkey(app: AppHandle, click_enabled: Arc<Mutex<bool>>) {
 }
 
 #[tauri::command]
-async fn set_delay(app: AppHandle, delay: u64) {
+async fn set_delay(app: AppHandle, delay: f64, unit: String) {
   let state = app.state::<Mutex<DelayState>>();
   let mut lock = state.lock().unwrap();
-  lock.delay = delay;
+  lock.delay = match unit.as_str() {
+    "cps" => (1000.0 / delay).round() as u64,
+    "s" => (delay * 1000.0).round() as u64,
+    "m" => (delay * 60_000.0).round() as u64,
+    "h" => (delay * 3_600_000.0).round() as u64,
+    _ => delay.round() as u64,
+  };
 }
 
 fn main() {
@@ -90,6 +96,24 @@ fn main() {
     app.listen("leave", move |_e| {
       let mut click_enabled = click_enabled_leave.lock().unwrap();
       *click_enabled = true;
+    });
+    app.listen("type", move |e| {
+      println!("{:?}", e.payload());
+      if e.payload() == "\"cps\"" {
+        println!("cps");
+      }
+      if e.payload() == "\"ms\"" {
+        println!("ms");
+      }
+      if e.payload() == "\"s\"" {
+        println!("s");
+      }
+      if e.payload() == "\"m\"" {
+        println!("m");
+      }
+      if e.payload() == "\"h\"" {
+        println!("h");
+      }
     });
     Ok(())
   })
