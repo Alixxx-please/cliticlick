@@ -32,7 +32,7 @@ jobs:
       
       - uses: tauri-apps/tauri-action@v0
         with:
-          tauriScript: bun run tauri
+          tauriScript: bun run tauri build
       
       - name: Upload artifact for Windows
         if: matrix.platform == 'windows-latest'
